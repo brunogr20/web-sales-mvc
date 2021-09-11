@@ -17,7 +17,7 @@ namespace WebSales.Data
 
         public void Seed()
         {
-            if (_context.Department.Any() || _context.SalesRecord.Any() || _context.Seller.Any())
+        /*    if (_context.Department.Any() || _context.SalesRecord.Any() || _context.Seller.Any())
             {
                 return;
             }
@@ -72,7 +72,7 @@ namespace WebSales.Data
 
                 _context.SaveChanges();
 
-      
+      */
         }
     }
 }

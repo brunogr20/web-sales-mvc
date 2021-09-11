@@ -10,8 +10,8 @@ using WebSales.Data;
 namespace WebSales.Migrations
 {
     [DbContext(typeof(WebSalesContext))]
-    [Migration("20210908013528_OtherEntities")]
-    partial class OtherEntities
+    [Migration("20210911022224_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,8 +69,8 @@ namespace WebSales.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BaseSalary")
-                        .HasColumnType("int");
+                    b.Property<double>("BaseSalary")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");

@@ -67,8 +67,8 @@ namespace WebSales.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BaseSalary")
-                        .HasColumnType("int");
+                    b.Property<double>("BaseSalary")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
