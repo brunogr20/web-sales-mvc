@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using WebSales.Services;
 using WebSales.Models;
@@ -46,7 +47,7 @@ namespace WebSales.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             var obj = _sellerService.FindByIdI(id.Value);
             return View(obj);
@@ -64,9 +65,14 @@ namespace WebSales.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             var obj = _sellerService.FindByIdI(id.Value);
+
+            if (obj ==null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
             return View(obj);
         }
 
@@ -75,12 +81,12 @@ namespace WebSales.Controllers
 
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             var obj = _sellerService.FindByIdI(id.Value);
             if (obj==null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
             List<Department> departments = _departmentService.FindAll();
@@ -95,7 +101,7 @@ namespace WebSales.Controllers
         {
             if (id != seller.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }
 
             try
@@ -105,12 +111,25 @@ namespace WebSales.Controllers
             }
             catch (NotFoundException e)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = e.Message});
             }
             catch (DbConcurrentcyException e)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
+        }
+
+        public IActionResult Error(string message)
+        {
+
+            var viewModel = new WebSales.Models.ViewModels.ErrorViewModel
+            { 
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+
+            return View(viewModel);
+
         }
 
     }
