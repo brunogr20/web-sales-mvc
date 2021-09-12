@@ -1,18 +1,24 @@
 ﻿@model WebSales.Models.Seller
-@{
-    ViewData["Title"] = "Delete";
-}
-<h2>@ViewData["Title"]</h2>
 
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class="mt-2">@ViewData["Title"]</h2>
 
 <ul class="list-group">
+    <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Department) :</strong> @Html.DisplayFor(model => model.Department.Name)</li>
     <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Name) :</strong> @Html.DisplayFor(model => model.Name)</li>
     <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Email) :</strong> @Html.DisplayFor(model => model.Email)</li>
     <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.BirthDate) :</strong> @Html.DisplayFor(model => model.BirthDate)</li>
     <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.BaseSalary) :</strong> @Html.DisplayFor(model => model.BaseSalary)</li>
 </ul>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn" />
-        <a asp-action="Index">Back to list</a>
-    </form>
+
+    
+
+<div class="mt-2">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
+    <a asp-action="Index">Back to list</a>
+</div>
+
+
