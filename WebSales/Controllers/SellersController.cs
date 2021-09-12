@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using WebSales.Services;
-
+using WebSales.Models;
+using WebSales.Models.ViewModels;
 
 namespace WebSales.Controllers
 {
@@ -10,10 +11,12 @@ namespace WebSales.Controllers
     {
 
         private readonly SellerService _sellerService;
+        private readonly DepartmentService _departmentService;
 
-        public SellersController(SellerService sellerService)
+        public SellersController(SellerService sellerService, DepartmentService departmentService)
         {
             _sellerService = sellerService;
+            _departmentService = departmentService;
         }
 
         public IActionResult Index()
@@ -21,5 +24,21 @@ namespace WebSales.Controllers
             var list = _sellerService.FindAll();
             return View(list);
         }
+
+        public IActionResult Create()
+        {
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Seller selle)
+        {
+            _sellerService.Insert(selle);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
