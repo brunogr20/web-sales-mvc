@@ -1,0 +1,19 @@
+﻿@model WebSales.Models.Seller
+@{
+    ViewData["Title"] = "Delete";
+}
+<h2>@ViewData["Title"]</h2>
+
+
+<dl class="d-lg-flex">
+
+    <dt>@Html.DisplayFor(model=>model.Name)</dt>
+    <dd>@Html.DisplayNameFor(model=>model.Name)</dd>
+    <br />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn"/>
+        <a asp-action="Index">Back to list</a>
+    </form>
+
+</dl>
