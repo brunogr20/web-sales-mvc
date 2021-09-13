@@ -9,32 +9,42 @@
 <div class="row">
     <div>
         <form class="" asp-action="Create">
-                <div class="form-row align-items-center">
-                        <label asp-for="Seller.DepartmentId" class="mr-sm-2" >Departments</label>
-                        <select  asp-for="Seller.DepartmentId" class="custom-select mr-sm-2"
-                                 asp-items="@(new SelectList(Model.Departments,"Id","Name"))">                   
-                        </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Seller.Name"></label>
-                    <input asp-for="Seller.Name" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Seller.Email"></label>
-                    <input asp-for="Seller.Email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Seller.BirthDate"></label>
-                    <input asp-for="Seller.BirthDate" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Seller.BaseSalary"></label>
-                    <input asp-for="Seller.BaseSalary" class="form-control" />
-                </div>
-                <div>
-                    <input class="btn btn-success" type="submit" value="Create" />
-                </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-row align-items-center">
+                <label asp-for="Seller.DepartmentId" class="mr-sm-2">Departments</label>
+                <select asp-for="Seller.DepartmentId" class="custom-select mr-sm-2"
+                        asp-items="@(new SelectList(Model.Departments,"Id","Name"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.Name"></label>
+                <input asp-for="Seller.Name" class="form-control" />
+                <span asp-validation-for="Seller.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.Email"></label>
+                <input asp-for="Seller.Email" class="form-control" />
+                <span asp-validation-for="Seller.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.BirthDate"></label>
+                <input asp-for="Seller.BirthDate" class="form-control" />
+                <span asp-validation-for="Seller.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.BaseSalary"></label>
+                <input asp-for="Seller.BaseSalary" class="form-control" />
+                <span asp-validation-for="Seller.BaseSalary" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                <input class="btn btn-success" type="submit" value="Create" />
+            </div>
         </form>
 
     </div>
 </div>
+
+@section Scripts{ 
+ @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
